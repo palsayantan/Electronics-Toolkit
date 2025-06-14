@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Electronics Toolkit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #121212;
+      color: #ffffff;
+      margin: 0;
+      padding: 0 2rem;
+    }
+    header {
+      background: #1f1f1f;
+      text-align: center;
+      padding: 1rem;
+      font-size: 1.5rem;
+      color: #00ffc3;
+    }
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: space-evenly;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .tool {
+      background: #1e1e1e;
+      border: 2px solid #00ffc3;
+      border-radius: 10px;
+      padding: 1rem;
+      flex: 1 1 30%;
+      box-sizing: border-box;
+      min-width: 280px;
+      max-width: 100%;
+    }
+    h2 {
+      color: #00ffc3;
+      margin-top: 0;
+    }
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1rem;
+    }
+    label {
+      margin-bottom: 0.3rem;
+      color: #ccc;
+    }
+    input,
+    select {
+      padding: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 5px;
+      background: #2c2c2c;
+      color: #fff;
+    }
+    .unit-select {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <header>Electronics Toolkit</header>
+  <div class="container">
+    <!-- Ohm's Law Calculator -->
+    <div class="tool" onkeydown="handleKey(event, 'ohms')">
+      <h2>Ohm's Law</h2>
+      <div class="input-group">
+        <label>Voltage (V)</label>
+        <input type="text" id="voltage" />
+      </div>
+      <div class="input-group">
+        <label>Current (I)</label>
+        <div class="unit-select">
+          <input type="text" id="current" />
+          <select id="currentUnit">
+            <option value="0.001" selected>mA</option> <!-- default mA -->
+            <option value="1">A</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Resistance (R)</label>
+        <div class="unit-select">
+          <input type="text" id="resistance" />
+          <select id="resistanceUnit">
+            <option value="1">Ω</option>
+            <option value="1000">kΩ</option>
+            <option value="1000000">MΩ</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Power (W)</label>
+        <input type="text" id="power" readonly />
+      </div>
+    </div>
+
+    <!-- LED Resistor Calculator -->
+    <div class="tool" onkeydown="handleKey(event, 'led')">
+      <h2>LED Resistor</h2>
+      <div class="input-group">
+        <label>Supply Voltage (Vin)</label>
+        <input type="text" id="supplyVoltage" />
+      </div>
+      <div class="input-group">
+        <label>LED Voltage (Vled)</label>
+        <input type="text" id="ledVoltage" />
+      </div>
+      <div class="input-group">
+        <label>LED Current (I)</label>
+        <div class="unit-select">
+          <input type="text" id="ledCurrent" />
+          <select id="ledCurrentUnit">
+            <option value="0.001" selected>mA</option> <!-- default mA -->
+            <option value="1">A</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>LED Resistor (R)</label>
+        <div class="unit-select">
+          <input type="text" id="ledResistor" />
+          <select id="ledResistorUnit">
+            <option value="1">Ω</option>
+            <option value="1000">kΩ</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Voltage Divider Calculator -->
+    <div class="tool" onkeydown="handleKey(event, 'divider')">
+      <h2>Voltage Divider</h2>
+      <div class="input-group">
+        <label>Input Voltage (Vin)</label>
+        <input type="text" id="vin" />
+      </div>
+      <div class="input-group">
+        <label>Output Voltage (Vout)</label>
+        <input type="text" id="vout" />
+      </div>
+      <div class="input-group">
+        <label>Resistor R1</label>
+        <div class="unit-select">
+          <input type="text" id="r1" />
+          <select id="r1Unit">
+            <option value="1">Ω</option>
+            <option value="1000">kΩ</option>
+            <option value="1000000">MΩ</option>
+          </select>
+        </div>
+      </div>
+      <div class="input-group">
+        <label>Resistor R2</label>
+        <div class="unit-select">
+          <input type="text" id="r2" />
+          <select id="r2Unit">
+            <option value="1">Ω</option>
+            <option value="1000">kΩ</option>
+            <option value="1000000">MΩ</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    function parseValue(val, unit) {
+      const num = parseFloat(val);
+      const multiplier = parseFloat(unit);
+      return isNaN(num) ? NaN : num * multiplier;
+    }
+
+    function handleKey(event, tool) {
+      if (event.key === 'Enter') {
+        const changedField = event.target.id;
+        console.log(`Enter pressed in: ${changedField}`);
+
+        switch (tool) {
+          case 'ohms': calculateOhms(changedField); break;
+          case 'led': calculateLED(changedField); break;
+          case 'divider': calculateDivider(changedField); break;
+        }
+      }
+    }
+
+
+    function calculateOhms(changedField) {
+      const v = parseFloat(document.getElementById('voltage').value);
+      const i = parseValue(
+        document.getElementById('current').value,
+        document.getElementById('currentUnit').value
+      );
+      const r = parseValue(
+        document.getElementById('resistance').value,
+        document.getElementById('resistanceUnit').value
+      );
+
+      if (!isNaN(v) && !isNaN(i) && (changedField === 'current' || changedField === 'voltage')) {
+        const rVal = v / i;
+        updateFieldWithUnit('resistance', 'resistanceUnit', rVal);
+        const power = v * i;
+        document.getElementById('power').value = power.toFixed(3);
+      } else if (!isNaN(v) && !isNaN(r) && (changedField === 'resistance' || changedField === 'voltage')) {
+        const iVal = v / r;
+        updateFieldWithUnit('current', 'currentUnit', iVal);
+        const power = v * iVal;
+        document.getElementById('power').value = power.toFixed(3);
+      } else if (!isNaN(i) && !isNaN(r) && (changedField === 'current' || changedField === 'resistance')) {
+        const vVal = i * r;
+        document.getElementById('voltage').value = vVal.toFixed(2);
+        const power = vVal * i;
+        document.getElementById('power').value = power.toFixed(3);
+      } else {
+        document.getElementById('power').value = '';
+      }
+    }
+
+    function calculateLED(changedField) {
+      const vs = parseFloat(document.getElementById('supplyVoltage').value);
+      const vf = parseFloat(document.getElementById('ledVoltage').value);
+      const i = parseValue(
+        document.getElementById('ledCurrent').value,
+        document.getElementById('ledCurrentUnit').value
+      );
+      const r = parseValue(
+        document.getElementById('ledResistor').value,
+        document.getElementById('ledResistorUnit').value
+      );
+
+      if(!isNaN(vs) && !isNaN(vf) && vs > vf){
+        if (!isNaN(i) && i > 0 && changedField === 'ledCurrent') {
+          const rCalc = (vs - vf) / i;
+          updateFieldWithUnit('ledResistor', 'ledResistorUnit', rCalc);
+        } else if (!isNaN(r) && r > 0 && changedField === 'ledResistor') {
+          const iCalc = (vs - vf) / r;
+          updateFieldWithUnit('ledCurrent', 'ledCurrentUnit', iCalc);
+        }
+      } else {
+        document.getElementById('ledResistor').value = '';
+        document.getElementById('ledCurrent').value = '';
+      }
+    }
+
+  function calculateDivider(changedField) {
+    const vin = parseFloat(document.getElementById('vin').value);
+    const vout = parseFloat(document.getElementById('vout').value);
+    const r1Input = document.getElementById('r1').value;
+    const r2Input = document.getElementById('r2').value;
+    const r1Unit = document.getElementById('r1Unit').value;
+    const r2Unit = document.getElementById('r2Unit').value;
+
+    const r1 = parseValue(r1Input, r1Unit);
+    const r2 = parseValue(r2Input, r2Unit);
+
+    if ((!isNaN(vin) || !isNaN(vout)) && (vin > 0 || vout >= 0)) {
+      if (!isNaN(r1) && r1 > 0 && changedField === 'r1') {
+        // Calculate R2 = R1 * Vout / (Vin - Vout)
+        const r2Calc = r1 * vout / (vin - vout);
+        setResistorValue('r2', 'r2Unit', r2Calc);
+      } else if (!isNaN(r2) && r2 > 0 && changedField === 'r2') {
+        // Calculate R1 = R2 * (Vin - Vout) / Vout
+        const r1Calc = r2 * (vin - vout) / vout;
+        setResistorValue('r1', 'r1Unit', r1Calc);
+      } else if (!isNaN(r1) && !isNaN(r2) && r1 > 0 && r2 > 0 && changedField === 'vout') {
+        // Calculate Vout if both resistors are provided
+        const voutCalc = vin * (r2 / (r1 + r2));
+        document.getElementById('vout').value = voutCalc.toFixed(2);
+      }
+    } else {
+      // Clear fields if inputs are invalid or out of range
+      document.getElementById('r1').value = '';
+      document.getElementById('r2').value = '';
+      document.getElementById('vout').value = '';
+    }
+  }
+  function setResistorValue(inputId, unitId, value) {
+    let unit = 1;
+    let displayValue = value;
+
+    if (value >= 1000000) {
+      unit = 1000000;
+      displayValue = value / 1000000;
+    } else if (value >= 1000) {
+      unit = 1000;
+      displayValue = value / 1000;
+    }
+
+    document.getElementById(inputId).value = displayValue.toFixed(2);
+    document.getElementById(unitId).value = unit;
+  }
+
+  function updateFieldWithUnit(inputId, unitId, value) {
+    let unit = 1;
+    let displayValue = value;
+
+    if (value >= 1000000) {
+      unit = 1000000;
+      displayValue = value / 1000000;
+    } else if (value >= 1000) {
+      unit = 1000;
+      displayValue = value / 1000;
+    } else if (value < 1) {
+      unit = 0.001; // mA
+      displayValue = value / 0.001;
+    }
+
+    document.getElementById(inputId).value = displayValue.toFixed(2);
+    document.getElementById(unitId).value = unit;
+  }
+  </script>
+</body>
+</html>
+
+
