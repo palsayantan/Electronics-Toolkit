@@ -1,117 +1,114 @@
-🔧 Electronics Toolkit
-An offline-first, modern web-based toolkit for electronics engineers, hobbyists, and students. Whether you're breadboarding at midnight or designing a PCB under a deadline, this collection of calculators and utilities will make your workflow smoother.
 
-💡 Built with HTML, CSS & JavaScript — no installations, no internet required, just open and go!
+# 🔧 Electronics Toolkit
 
-🧰 Features
-Currently available tools:
+An **offline-first**, modern web-based toolkit for electronics engineers, hobbyists, and students. Whether you're breadboarding at midnight or designing a PCB under a deadline, this collection of calculators and utilities makes your workflow smoother.
 
-Tool	Description
-Ohm's Law Calculator	Quickly calculate Voltage, Current, Resistance, or Power from any two known values.
-LED Resistor Calculator	Determine the correct series resistor for your LED, based on supply voltage, forward voltage, and current.
-Feedback Resistor Calculator	Calculate feedback resistor pairs for op-amp gain configurations (inverting and non-inverting).
+Built with **HTML, CSS & JavaScript**—no installations needed. Simply open in a browser and go!
 
-⚙️ Each tool features dynamic calculations that update in real time as you input values.
+---
 
-✨ Demo
-If you’d like to try it out in your browser (online), click here.
+## 🧰 Features
 
-📂 Usage
-🔌 Offline Use
-Just download or clone the repo:
+| Tool                          | Description                                                                 |
+|------------------------------|-----------------------------------------------------------------------------|
+| **Ohm's Law Calculator**     | Calculate Voltage, Current, Resistance, or Power from any two known values. |
+| **LED Resistor Calculator**  | Determine the correct series resistor for your LED based on input values.   |
+| **Feedback Resistor Calculator** | Calculate resistor pairs for op‑amp gain (inverting and non‑inverting). |
 
-bash
-Copy
-Edit
+⚙️ Each tool updates in real time as you input values.
+
+---
+
+## 🎬 Demo
+
+Try the live version in your browser:  
+[https://palsayantan.github.io/Electronics-Toolkit/](https://palsayantan.github.io/Electronics-Toolkit/)
+
+---
+
+## 🚀 Quick Start
+
+### 🔧 Installation
+
+```bash
 git clone https://github.com/palsayantan/Electronics-Toolkit.git
-Then open index.html in any modern browser. That’s it!
+```
 
-No setup, no server, no nonsense.
+Then open `index.html` in any modern browser—no setup required!
 
-🖥️ Browser Compatibility
-✅ Chrome
+### ✅ Browser Compatibility
 
-✅ Firefox
+- Chrome, Firefox, Edge, Opera, Brave ✅  
+- Safari ⚠️ (older versions may have minor rendering issues)
 
-✅ Edge
+---
 
-✅ Opera
+## 📂 Project Structure
 
-✅ Brave
-
-⚠️ Safari (some rendering issues on older versions)
-
-🧱 Project Structure
-graphql
-Copy
-Edit
+```
 Electronics-Toolkit/
-├── assets/           # Icons, images, fonts
-├── css/              # Stylesheets
-├── js/               # JavaScript for each tool
-├── tools/            # HTML files for individual calculators
-├── index.html        # Homepage with tool links
-└── README.md         # You're reading it!
-📌 Roadmap
-Planned additions:
+├── assets/      # Icons, fonts
+├── css/         # Stylesheets
+├── js/          # Script files for each tool
+├── tools/       # Individual HTML calculator pages
+├── index.html   # Main launcher page
+└── README.md    # ← You're here
+```
 
- Voltage Divider Calculator
+---
 
- Capacitor Charging Time Calculator
+## 🛠️ Roadmap
 
- 555 Timer Configurator (Astable / Monostable)
+Future additions planned:
 
- Zener Diode Regulator Calculator
+- Voltage Divider Calculator  
+- Capacitor Charging Time Calculator  
+- 555 Timer Configurator  
+- Zener Diode Regulator Calculator  
+- Transistor Biasing Tool  
+- Inductor Energy Calculator  
+- RC/RL/LC Filter Designer  
+- PCB Trace Width Estimator  
 
- Transistor Biasing Tool
+Pull requests are welcome!
 
- Inductor Energy Calculator
+---
 
- RC/RL/LC Filter Designer
+## 🎯 Why This Toolkit
 
- PCB Trace Width Estimator
+- Fully **offline-friendly** — ideal for labs, field work, or exam scenarios  
+- **Lightweight**, fast, and distraction-free  
+- Clean UI with real-time responsiveness  
 
-Contributions are welcome (see below)! 🎯
+---
 
-🧠 Why This Exists
-There are plenty of calculators online, but most require internet access, suffer from bad UX, or bombard users with ads. This project aims to be:
+## 🎉 Contributing
 
-Offline-friendly (just keep it on a flash drive!)
+1. Fork the repo  
+2. Create a branch: `git checkout -b add-my-tool`  
+3. Add your tool (HTML/JS/CSS) in the appropriate folders  
+4. Link it in `index.html`  
+5. Send a pull request explaining your contribution
 
-Lightweight
+---
 
-Fast and responsive
+## 📄 License
 
-Visually clean and distraction-free
+Licensed under the **MIT License**. See [LICENSE](LICENSE) for details.
 
-Perfect for labs, exams, or field work where internet is flaky.
+---
 
-🙌 Contributing
-Pull requests are welcome! Here's how to get started:
+## 👨‍💻 Author
 
-Fork the repository.
+**Sayantan Pal**  
+- GitHub: [@palsayantan](https://github.com/palsayantan)  
 
-Create a new branch: git checkout -b add-my-tool
+---
 
-Add your HTML/JS/CSS in the correct folders.
+## 💬 Feedback
 
-Add a link to your tool in index.html.
+Found a bug or have a new tool idea?  
+Please open an issue: [Electronics‑Toolkit/issues](https://github.com/palsayantan/Electronics-Toolkit/issues)
 
-Submit a pull request and describe your addition!
-
-See CONTRIBUTING.md (coming soon) for detailed guidelines.
-
-📃 License
-MIT License
-
-Free for personal, academic, and commercial use. No warranties or liabilities.
-
-👨‍💻 Author
-Sayantan Pal
-GitHub • Portfolio • LinkedIn
-
-💬 Feedback
-Spotted a bug or have a tool idea?
-Open an issue here or email me directly at palsayantan098@gmail.com.
-
+---
 
